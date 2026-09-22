@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Admin login · Mampondweni Miracle Centre{% endblock %}
+{% block content %}
+
+<section class="auth-page">
+  <h1>Admin login</h1>
+  <p class="hero-lede">Log in to add, edit, or remove lessons from the schedule.</p>
+
+  <form method="post" class="auth-form" novalidate>
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required autofocus autocomplete="username">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Log in</button>
+      <a href="{{ url_for('schedule') }}" class="btn btn-ghost">Back to schedule</a>
+    </div>
+  </form>
+</section>
+
+{% endblock %}

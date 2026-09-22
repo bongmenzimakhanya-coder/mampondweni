@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Add lesson' if mode == 'add' else 'Edit lesson' }} · Mampondweni Miracle Centre{% endblock %}
+{% block content %}
+
+<section class="form-page">
+  <h1>{{ 'Schedule a lesson' if mode == 'add' else 'Edit lesson' }}</h1>
+
+  <form method="post" class="record-form" novalidate>
+    <div class="field-row">
+      <div class="field">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" value="{{ lesson.date.isoformat() if lesson else today }}" required>
+      </div>
+      <div class="field">
+        <label for="assigned_member">Assigned member</label>
+        <input type="text" id="assigned_member" name="assigned_member" value="{{ lesson.assigned_member if lesson else '' }}" placeholder="e.g. Sister Nomvula Dube" required autofocus>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="book">Book</label>
+        <select id="book" name="book" required>
+          <option value="" disabled {{ 'selected' if not lesson }}>Choose a book…</option>
+          <optgroup label="Old Testament">
+            {% for b in old_testament %}
+            <option value="{{ b }}" {{ 'selected' if lesson and lesson.book == b }}>{{ b }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="New Testament">
+            {% for b in new_testament %}
+            <option value="{{ b }}" {{ 'selected' if lesson and lesson.book == b }}>{{ b }}</option>
+            {% endfor %}
+          </optgroup>
+        </select>
+      </div>
+      <div class="field">
+        <label for="chapter">Chapter</label>
+        <input type="text" id="chapter" name="chapter" value="{{ lesson.chapter if lesson else '' }}" placeholder="e.g. 3 or 3:1-10" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="contact">Contact</label>
+      <input type="text" id="contact" name="contact" value="{{ lesson.contact if lesson else '' }}" placeholder="Phone or email for the assigned member">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">{{ 'Save lesson' if mode == 'add' else 'Save changes' }}</button>
+      <a href="{{ url_for('admin_dashboard') }}" class="btn btn-ghost">Cancel</a>
+    </div>
+  </form>
+</section>
+
+{% endblock %}

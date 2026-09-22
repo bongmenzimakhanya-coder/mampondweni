@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} · Mampondweni Miracle Centre{% endblock %}
+{% block content %}
+
+<section class="error-page">
+  <p class="error-code">{{ code }}</p>
+  <h1>{{ message }}</h1>
+  <a href="{{ url_for('schedule') }}" class="btn btn-primary">Back to the schedule</a>
+</section>
+
+{% endblock %}

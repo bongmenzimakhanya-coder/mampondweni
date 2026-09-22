@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Admin · Mampondweni Miracle Centre{% endblock %}
+{% block content %}
+
+<section class="admin-page">
+  <div class="admin-head">
+    <div>
+      <h1>Manage lessons</h1>
+      <p class="hero-lede">Changes appear on the public schedule immediately.</p>
+    </div>
+    <a href="{{ url_for('add_lesson') }}" class="btn btn-primary">Add lesson</a>
+  </div>
+
+  {% if lessons %}
+  <div class="table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Assigned member</th>
+          <th>Book</th>
+          <th>Chapter</th>
+          <th>Contact</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for l in lessons %}
+        <tr class="{{ 'is-past' if l.date < today }}">
+          <td class="cell-date">{{ l.date.strftime('%d %b %Y') }}</td>
+          <td class="cell-member">{{ l.assigned_member }}</td>
+          <td>{{ l.book }}</td>
+          <td>{{ l.chapter }}</td>
+          <td>{{ l.contact or '—' }}</td>
+          <td class="cell-actions">
+            <a href="{{ url_for('edit_lesson', lesson_id=l.id) }}" class="btn-icon btn-icon-edit" title="Edit lesson">
+              <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><path d="M13.5 3.5 16.5 6.5 7 16H4v-3L13.5 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <form method="post" action="{{ url_for('delete_lesson', lesson_id=l.id) }}" onsubmit="return confirm('Remove this lesson permanently?');">
+              <button type="submit" class="btn-icon btn-icon-delete" title="Delete lesson">&times;</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="result-count">{{ lessons|length }} lesson{{ 's' if lessons|length != 1 }}</p>
+  {% else %}
+  <div class="empty-state">
+    <p>No lessons scheduled yet.</p>
+    <a href="{{ url_for('add_lesson') }}" class="btn btn-primary">Schedule the first lesson</a>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

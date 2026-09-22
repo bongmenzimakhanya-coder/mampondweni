@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Schedule · Mampondweni Miracle Centre{% endblock %}
+{% block content %}
+
+<section class="schedule-hero">
+  <h1>Bible lesson schedule</h1>
+  <p class="hero-lede">Who's teaching, and from where in scripture — updated by the admin team as lessons are assigned.</p>
+</section>
+
+<section class="rota">
+  {% if upcoming %}
+    <ol class="rota-list">
+      {% for l in upcoming %}
+      <li class="rota-row {{ 'is-next' if l.id == next_id }}">
+        <div class="rota-date">
+          <span class="rota-day">{{ l.date.strftime('%d') }}</span>
+          <span class="rota-monyear">{{ l.date.strftime('%b %Y') }}</span>
+        </div>
+        <div class="rota-body">
+          {% if l.id == next_id %}<span class="rota-tag">Next lesson</span>{% endif %}
+          <h2 class="rota-ref">{{ l.book }} {{ l.chapter }}</h2>
+          <p class="rota-meta">
+            <span class="rota-member">{{ l.assigned_member }}</span>
+            {% if l.contact %}<span class="rota-contact">{{ l.contact }}</span>{% endif %}
+          </p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <div class="empty-state">
+      <p>No lessons scheduled yet.</p>
+    </div>
+  {% endif %}
+
+  {% if past %}
+  <details class="past-group">
+    <summary>Past lessons ({{ past|length }})</summary>
+    <ol class="rota-list rota-list-past">
+      {% for l in past %}
+      <li class="rota-row">
+        <div class="rota-date">
+          <span class="rota-day">{{ l.date.strftime('%d') }}</span>
+          <span class="rota-monyear">{{ l.date.strftime('%b %Y') }}</span>
+        </div>
+        <div class="rota-body">
+          <h2 class="rota-ref">{{ l.book }} {{ l.chapter }}</h2>
+          <p class="rota-meta">
+            <span class="rota-member">{{ l.assigned_member }}</span>
+            {% if l.contact %}<span class="rota-contact">{{ l.contact }}</span>{% endif %}
+          </p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </details>
+  {% endif %}
+</section>
+
+{% endblock %}
