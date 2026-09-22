@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}Mampondweni Miracle Centre{% endblock %}</title>
-<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+<link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='images/logo.jpg') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -13,11 +13,7 @@
 
 <header class="site-header">
   <a href="{{ url_for('schedule') }}" class="brand">
-    <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="20" r="19" fill="#1B2A41" stroke="#B08D3D" stroke-width="1.4"/>
-      <path d="M20 11c-2.6 1.6-5.8 2.2-8.5 1.9v10.4c0 4 3.4 6.8 8.5 8.7 5.1-1.9 8.5-4.7 8.5-8.7V12.9c-2.7.3-5.9-.3-8.5-1.9Z" stroke="#B08D3D" stroke-width="1.3" stroke-linejoin="round"/>
-      <path d="M20 16v9M16 20.2c1.1.9 2.5 1.4 4 1.4s2.9-.5 4-1.4" stroke="#B08D3D" stroke-width="1.1" stroke-linecap="round"/>
-    </svg>
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Revival Life Ministry logo" class="brand-mark">
     <span class="brand-text">
       <span class="brand-name">Mampondweni Miracle Centre</span>
       <span class="brand-sub">Bible lesson schedule</span>
